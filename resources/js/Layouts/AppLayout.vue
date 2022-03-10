@@ -22,6 +22,14 @@
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </jet-nav-link>
+
+                                <jet-nav-link v-if="$page.props.user.role === 'user' " :href="route('User')" :active="route().current('User')">
+                                    Tasks
+                                </jet-nav-link>
+
+                                 <jet-nav-link  v-if="$page.props.user.role === 'admin'"  :href="route('Admin')" :active="route().current('Admin')">
+                                    Manage users
+                                </jet-nav-link>
                             </div>
                         </div>
 
@@ -245,6 +253,7 @@
         props: {
             title: String,
         },
+        props: ['user'],
 
         components: {
             Head,

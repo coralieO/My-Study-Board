@@ -17,9 +17,15 @@
                 <jet-label for="firstName" value="FirstName" />
                 <jet-input id="firstName" type="text" class="mt-1 block w-full" v-model="form.firstName" required autofocus autocomplete="firstName" />
             </div>
-             <div>
+             <div class="mt-4">
                 <jet-label for="class" value="Class" />
-                <jet-input id="class" type="text" class="mt-1 block w-full" v-model="form.class" required autofocus autocomplete="class" />
+                <select name="class" id="class" class="block mt-1 w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                v-model="form.class" required autofocus autocomplete="class">
+                    <option value="A2">A2</option>
+                    <option value="A3">A3</option>
+                    <option value="A4">A4</option>
+                    <option value="A5">A5</option>
+                </select>
             </div>
             <div class="mt-4">
                 <jet-label for="email" value="Email" />

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,3 +29,23 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+Route::middleware (['auth'])->group(function () {
+    Route::get('/user/dashbord', [UserController::class, 'index']) ->name('User');
+    Route::get('/admin/dashbord', [AdminController::class, 'index']) ->name('Admin');
+    // Route::middleware(['role:user'])->group(function()
+    // {
+    //     Route::prefix('User')->group(function () {
+    //     Route::resource('User', UserController::class);
+    // });
+    // });
+    // Route::middleware(['role:admin'])->group(function()
+    // {
+    //     Route::prefix('Admin')->group(function () {
+    //     Route::resource('Admin', AdminController::class);
+    // });
+    // });
+
+});
+
+
