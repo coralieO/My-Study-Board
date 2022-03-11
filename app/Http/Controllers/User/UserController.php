@@ -10,12 +10,16 @@ class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     *  @param  string $role
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
         return Inertia::render('User');
+
+        // if (auth()->user()->role === 'admin') {
+        //     abort(403);
+        // }
     }
 
     /**

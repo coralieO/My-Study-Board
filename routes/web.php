@@ -31,8 +31,13 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::middleware (['auth'])->group(function () {
+    Route::middleware(['role:user'])->group(function(){
     Route::get('/user/dashbord', [UserController::class, 'index']) ->name('User');
-    Route::get('/admin/dashbord', [AdminController::class, 'index']) ->name('Admin');
+    });
+    Route::middleware(['role:admin'])->group(function()
+    {
+        Route::get('/admin/dashbord', [AdminController::class, 'index']) ->name('Admin');
+    });
     // Route::middleware(['role:user'])->group(function()
     // {
     //     Route::prefix('User')->group(function () {

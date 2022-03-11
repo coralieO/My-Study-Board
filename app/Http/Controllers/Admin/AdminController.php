@@ -16,6 +16,10 @@ class AdminController extends Controller
     public function index()
     {
         return Inertia::render('Admin');
+
+        // if ( auth()->user()->role === 'user') {
+        //     abort(403);
+        // }
     }
 
     /**
