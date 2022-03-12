@@ -1,25 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers;
 
-use Inertia\Inertia;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class UserTaskController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *  @param  string $role
+     *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Inertia::render('User');
-
-        // if (auth()->user()->role === 'admin') {
-        //     abort(403);
-        // }
+        //
     }
 
     /**
