@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -15,9 +16,10 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin');
-
-        // if ( auth()->user()->role === 'user') {
+      $user = User::all();
+      return Inertia::render('ManageUsers', [
+        "users" => $user
+    ]);    // if (         auth()->user()->role === 'user') {
         //     abort(403);
         // }
     }
@@ -54,7 +56,7 @@ class AdminController extends Controller
         //
     }
 
-    /**
+/**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -62,7 +64,11 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user= User::findOrFail($id);
+
+            return Inertia::render('ManageUsers/Edit', [
+                "users" => $user
+            ]);
     }
 
     /**
@@ -74,7 +80,20 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $task = User::findOrFail($id);
+
+        $this->validate($request, [
+            "name" => ['required'],
+            "firstName" => ['required'],
+            "class" => ['required'],
+            "email" => ['required'],
+            "role" => ['required'],
+        ]);
+
+        $task->update($request->only("name","firstName", "class","email","role"));
+
+        return   redirect()->route('Admin');
     }
 
     /**
@@ -85,6 +104,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+            $user->delete();
+
+            return  redirect()->route('Admin');
     }
 }

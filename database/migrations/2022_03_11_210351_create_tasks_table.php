@@ -18,8 +18,9 @@ class CreateTasksTable extends Migration
             $table->string('Title');
             $table->longText('Description');
             $table->enum('Status', ['start','in progress','finish']);
-            $table->date("d-m-y");
-            $table->foreignId('user_id')->constrained('users');
+            $table->boolean('completed')->default(false);
+            $table->date("create_at")->timestamps();
+            $table->foreignId('user_id')->constrained('users') ;
             $table->timestamps();
         });
     }

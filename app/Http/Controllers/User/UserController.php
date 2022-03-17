@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Task;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
@@ -15,7 +17,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        return Inertia::render('User');
 
         // if (auth()->user()->role === 'admin') {
         //     abort(403);
@@ -40,7 +41,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
     }
 
     /**
