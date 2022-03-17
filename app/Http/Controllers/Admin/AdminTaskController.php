@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Task;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
-class UserTaskController extends Controller
+class AdminTaskController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $tasks = DB::table('tasks')->where('user_id', '=', Auth::user()->id)->orderBy('create_at','desc')->get();
+        // $tasks = DB::table('tasks')->orderBy('create_at','desc')->get();
+         $tasks = Task::with('user')->get();;
 
-        return Inertia::render('User', [
+        return Inertia::render('Admin', [
             "tasks" => $tasks
         ]);
     }
@@ -32,7 +32,7 @@ class UserTaskController extends Controller
      */
     public function create()
     {
-           return Inertia::render('UserTasks/TaskCreate');
+           return Inertia::render('AdminTasks/TaskCreate');
 
     }
 
@@ -59,7 +59,7 @@ class UserTaskController extends Controller
             'create_at' => now()->format('Y-m-d')
         ]);
         //   Task::create($request->only("Title","Description", "Status"));
-            return  redirect()->route('User');
+            return  redirect()->route('adminTask');
 
     }
 
@@ -73,7 +73,7 @@ class UserTaskController extends Controller
     {
         $task = Task::findOrFail($id);
 
-            return Inertia::render("UserTasks/TaskDetail", [
+            return Inertia::render("AdminTasks/TaskDetail", [
                 "tasks" => $task
             ]);
 
@@ -90,7 +90,7 @@ class UserTaskController extends Controller
     {
         $task = Task::findOrFail($id);
 
-            return Inertia::render('UserTasks/TaskEdit', [
+            return Inertia::render('AdminTasks/TaskEdit', [
                 "tasks" => $task
             ]);
     }
@@ -129,6 +129,6 @@ class UserTaskController extends Controller
         $task = Task::findOrFail($id);
             $task->delete();
 
-            return   redirect()->route('User');
+            return   redirect()->route('adminTask');
     }
 }

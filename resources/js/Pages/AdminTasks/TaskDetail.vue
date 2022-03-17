@@ -2,12 +2,10 @@
     <app-layout title="Dashboard">
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-              Student Dashboard
+             Task Detail
             </h2>
         </template>
-            <jet-button >
-                 <a :href="route('user.task.create')" :active="route().current('user.task.create')" class="text-white-600 hover:text-white-900">Create new task</a>
-            </jet-button>
+
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
@@ -16,13 +14,13 @@
                             <div class="mb-4">
                                 <h1 class="text-grey-darkest">My tasks</h1>
                                 <div>
-                                <div v-for="task in tasks" :key="task.id" class="flex mb-4 items-center">
-                                        <h2 class="w-full text-grey-darkest"> <a :href="route('user.task.show', task.id)" :active="route().current('user.task.show')">{{task.Title}}</a> </h2>
-                                        <h2 class="w-full text-grey-darkest">{{task.create_at}}</h2>
-                                        <h2 class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded">{{task.Status}}</h2>
-                                        <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green">Done</button>
-                                        <button @click="destroy(`${task.id}`)" class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">Remove </button>
-
+                                <div  class="flex mb-4 items-center">
+                                        <h2 class="w-full text-grey-darkest">{{tasks.Title}}</h2>
+                                        <h2 class="w-full text-grey-darkest">{{tasks.Description}}</h2>
+                                        <h2 class="w-full text-grey-darkest">{{tasks.create_at}}</h2>
+                                        <h2 class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded">{{tasks.Status}}</h2>
+                                        <button class="flex-no-shrink p-2 ml-4 mr-2 border-2 rounded hover:text-white text-green border-green hover:bg-green"> <a :href="route('admin.task.edit', tasks.id)" :active="route().current('admin.task.edit')">Edit</a></button>
+                                        <button @click="destroy(`${tasks.id}`)" class="flex-no-shrink p-2 ml-2 border-2 rounded text-red border-red hover:text-white hover:bg-red">Remove </button>
                                 </div>
                                 </div>
                             </div>
@@ -45,12 +43,12 @@
         components: {
             AppLayout,
         },
-       methods:{
+        methods:{
         destroy(id){
         if(confirm("Do you really want to delete?")){
 
-        this.$inertia.delete(this.route('user.task.delete',`${id}` ))}
-            }
-            }
-            })
+        this.$inertia.delete(this.route('admin.task.delete',`${id}` ))}
+        }
+        }
+    })
 </script>

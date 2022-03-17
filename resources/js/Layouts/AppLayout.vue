@@ -26,6 +26,9 @@
                                 <jet-nav-link v-if="$page.props.user.role === 'user' " :href="route('User')" :active="route().current('User')">
                                     Tasks
                                 </jet-nav-link>
+                                <jet-nav-link v-if="$page.props.user.role === 'admin' " :href="route('adminTask')" :active="route().current('adminTask')">
+                                   Tasks
+                                </jet-nav-link>
 
                                  <jet-nav-link  v-if="$page.props.user.role === 'admin'"  :href="route('Admin')" :active="route().current('Admin')">
                                     Manage users
